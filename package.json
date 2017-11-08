@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1"
+  },
+  "name": "fullstack",
+  "description": "前端全栈学习",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huangxin93/FullStack.git"
+  },
+  "author": "huangxin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huangxin93/FullStack/issues"
+  },
+  "homepage": "https://github.com/huangxin93/FullStack#readme",
+  "keywords": [
+    "fullStack"
+  ]
+}
