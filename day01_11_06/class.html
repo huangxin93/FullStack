@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>class</title>
+	<script type="text/javascript">
+		class Person{
+			constructor(name){
+				this.name = name; 
+			}
+			sayHi(){
+				console.log("我是" + this.name)
+			}
+			//
+			static cry(){
+				console.log("cry");
+			}
+			set name(name){
+				this._name = name ;
+			}
+			get name(){
+				return this._name;
+			}
+		}
+//转义
+		var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+		var Person = function () {
+			function Person(name) {
+				_classCallCheck(this, Person);
+
+				this.name = name;
+			}
+
+			_createClass(Person, [{
+				key: "sayHi",
+				value: function sayHi() {
+					console.log("我是" + this.name);
+				}
+			}, {
+				key: "name",
+				set: function set(name) {
+					this._name = name;
+				},
+				get: function get() {
+					return this._name;
+				}
+			}], [{
+				key: "cry",
+				value: function cry() {
+					console.log("cry");
+				}
+			}]);
+
+			return Person;
+		}();
+
+		class Son extends Person{
+			constructor(name){
+				super(name);
+			}
+			sayHi(){
+				console.log('son:' + this.name);
+			}
+		}
+
+		const person = new Person('huangx');
+		console.log(person.name); //读取属性会调用getter
+		person.name = "huangx2";
+		console.log(person.name);//同理，设置会调用setter
+		Person.cry();
+		person.sayHi()
+		const son = new Son('son',18);
+		son.sayHi(1)
+		console.log(son instanceof Person);
+		for(let key in son){
+			console.log(key); //_name
+		}
+		//class内部定义方法定义在原型链上
+		console.log(Object.keys(Person.prototype)); //[] 遍历自身可枚举属性
+		console.log(Object.getOwnPropertyNames(Person.prototype)); //["constructor", "sayHi"] 遍历自身所有属性
+		console.log(Person.prototype.sayHi); // function(){...}
+		console.log(Person.prototype.name); //undefined
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

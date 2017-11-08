@@ -1,7 +1,7 @@
-#问题纪录
+# 问题纪录
 - src refspec master does not match any.(git无法提交空目录)
 
-##es6
+## es6
 - 变量
   var -- 无块级作用域、重复定义不报错
 
@@ -39,7 +39,15 @@
 
  - 面向对象
  class extends super
- 拓展：public private
+ 拓展：public set get static private 传参类型校验 枚举
+ 1）class修饰不会变量提前
+ 2) es6中只有静态方法没有静态属性，es7支持静态属性 (静态方法直接定义在类上，Person.sayHi() , 因此子类无法继承 )
+ 3) set name(){} get name(){}
+ 4) js无重载
+ 5) class内部定义的方法定义在原型链上，且不可枚举
+ 6）set和get 使用defineProperty定义
+
+ 
 
  - promise 异步操作
 
