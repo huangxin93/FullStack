@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		function spinWords(words){
+		  let wordArr = words.split(' ');
+		  wordArr.map(function(item,index){
+		    if(item.length >= 5){
+		      let rev = item.split('').reverse().toString();
+		      wordArr[index] = rev;
+		    }
+		  })
+		  return wordArr.join(' ')
+		}
+		spinWords('Hey fellow warriors');
+	</script>
+</head>
+<body>
+
+</body>
+</html>

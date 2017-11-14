@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		const jsonp = function(url,callbackName){
+			let script = document.createElement('script');
+			script.src=url + "?callback=" + callbackName;
+			document.body.appendChild(script);
+		}
+		const cb = function(){
+			console.log("请求成功")
+		}
+		jsonp('url','cb');
+
+
+		//后端返回的script内容应为 cb(data);
+	</script>
+</head>
+<body>
+
+</body>
+</html>

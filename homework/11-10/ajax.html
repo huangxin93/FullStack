@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>xhr</title>
+	<script type="text/javascript">
+		let xhr = null;
+		if(window.XMLHttpRequest){
+			xhr = new XMLHttpRequest();
+		}else if(window.ActiveXObject){
+			//IE5\IE6
+			xhr = new ActiveXObject('Microsoft.XMLHTTP');
+		}
+
+		//		请求方式 请求地址 异步 默认为true异步
+		xhr.open('GET','url',true)
+		xhr.send(null);
+		xhr.onreadystatechange = function(){
+			/*
+			readyState 连接状态
+			0、初始化状态
+			1、连接到服务器
+			2、发送请求
+			3、响应头接收完毕
+			4、请求体接收完毕
+
+			status 请求状态码，200-299、304请求成功返回
+			*/
+			if(xhr.readyState == 4){
+				if( (xhr.status >= 200 && xhr.status <=299 ) || xhr.status == 304 ){
+					//请求成功
+					xhr.responseText
+					xhr.responseXML
+					xhr.responseURL
+				}else{
+					console.log('request is error')
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>

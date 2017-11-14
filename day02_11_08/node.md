@@ -6,7 +6,13 @@
 
 拓展：runner，async如何实现runner，async正确设计
 执行顺序？
-第一个promise错误后，后续promise是否会中断返回？
+第一个promise错误后，后续promise是否会中断返回？ 后续不再执行
+遇到第一个await是将线程交出async外的流程，是否等外面执行完了再回到async内？
+async里如何使用某一个请求的返回值作为整个方法的返回值？
+
+外部内容执行完后交回执行权，异步任务回按顺序进入执行队列
+
++null =》 0
 
 
 # 模块化

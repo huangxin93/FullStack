@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		
+				const step = function(){
+			return 1;
+		}
+		const step1 = function(){
+			// throw new Error('报错了');
+			return 2
+		}
+		const step2 = function(){
+			return new Promise(function(resovle,reject){
+				console.log("run step2 promise");
+				resovle('step2');
+			})
+		}
+		async function show(){
+			var s1 = await step();
+			console.log("show1:"+s1);
+			var s2 = await step1();
+			console.log("show2:"+s2);
+			var s3 = await step2();
+			console.log("show3:"+s3);
+			return 'show end';
+		}
+
+		try{
+			var func = show();
+			func.then(function(data){
+				console.log(data);
+			})
+			console.log('outer');
+			const p = new Promise(function(resovle,reject){
+				console.log('run outer promise');
+				resovle('outerPromise');
+			})
+			p.then(function(data){
+				console.log(data);
+			})
+			console.log('end');	
+		}catch(e){
+			console.log(e);
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>

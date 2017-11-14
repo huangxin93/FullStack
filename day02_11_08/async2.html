@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		const getId = function(){
+			return 1
+		}
+		async function get(){
+			const id = await getId();
+			console.log('id:' + id);
+			const req = new Request('https://baidu.com?code=' + id, {method: 'GET'});  
+			fetch(req,{credentials: 'include'}).then(function(response) {
+					  return response.json();
+				}).then(function(data) { 
+					return data;
+				})
+		}
+		const func = get();
+		func.then(function(data){
+			console.log(data);
+		})
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
