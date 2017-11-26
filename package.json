@@ -2,7 +2,8 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "multiparty": "^4.1.3"
+    "mysql": "^2.15.0",
+    "socket.io": "^2.0.4"
   },
   "name": "fullstack",
   "description": "前端全栈学习",

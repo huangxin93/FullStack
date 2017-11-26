@@ -1,5 +1,7 @@
 ## node.js
 - http
+  1. req\res常用信息
+  -res 相应结束需标记结束，res.end()
 - fs
 
 ## websocket
@@ -10,4 +12,4 @@
 2. 文件型数据库 －－ SQLSQLite
 3. 文档型数据库 －－
 4. 空间型数据库 －－ GIS
-5. NoSQL －－ redis 
+5. NoSQL －－ redis
