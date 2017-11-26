@@ -1,0 +1,43 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Script on Server",
+            "request": "launch",
+            "type": "janus",
+            "script": "${workspaceRoot}/index.js",
+            "username": "",
+            "password": "${command:extension.vscode-janus-debug.askForPassword}",
+            "principal": "",
+            "host": "localhost",
+            "applicationPort": 10000,
+            "debuggerPort": 8089,
+            "currentConfiguration": true,
+            "stopOnEntry": true,
+            "log": {
+                "fileName": "${workspaceRoot}/vscode-janus-debug-launch.log",
+                "logLevel": {
+                    "default": "Debug"
+                }
+            },
+            "timeout": 6000
+        },
+        {
+            "name": "Attach to Server",
+            "request": "attach",
+            "type": "janus",
+            "host": "localhost",
+            "debuggerPort": 8089,
+            "log": {
+                "fileName": "${workspaceRoot}/vscode-janus-debug-attach.log",
+                "logLevel": {
+                    "default": "Debug"
+                }
+            },
+            "timeout": 6000
+        }
+    ]
+}

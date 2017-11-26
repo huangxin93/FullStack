@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>
+
+        </title>
+        
+    </head>
+    <body>
+        <img class="preview" />
+        <input type="file" value="上传文件" class="upload" />
+    </body>
+    <script>
+            let upload = document.querySelector('.upload');
+            let preview = document.querySelector('.preview');
+            let oFreader = new FileReader();
+            //文件上传完毕
+            oFreader.onload = function(){
+                preview.src = this.result;
+            }
+            //文件上传失败
+            oFreader.onerror = function(){
+                this.error;
+            }
+            //文件开始上传前
+            oFreader.onloadstart = function(ev){
+                debugger;
+            }
+            upload.addEventListener('change',function(){
+                if(upload.files.length == 0) {
+                    return;
+                }
+                //这里可以做一些校验和限制
+                const file = upload.files[0];
+                // file.name --文件名
+                // file.type --文件类型
+                // file.size -- 文件大小
+
+                oFreader.readAsDataURL(upload.files[0]);
+            })
+        </script>
+</html>
