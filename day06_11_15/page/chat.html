@@ -1,0 +1,84 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+      <style>
+        .mine{
+          background: green;
+        }
+        .other{
+          background: gray;
+        }
+      </style>
+  </head>
+  <body>
+    用户名：<input name='user' id="user">
+    密码：<input name='pass' id="pass">
+    <button id="reg">注册</button>
+    <button id="login">登陆</button>
+    <textarea id="content" style="height:200px;width:200px"></textarea><button id="send">发送</button>
+    <ul id="messages">
+
+    </ul>
+  </body>
+  <script>
+    var user = '';
+     var user = document.getElementById('user');
+     var pass = document.getElementById('pass');
+     var content = document.getElementById('content');
+     var $reg = document.getElementById('reg');
+     var $login = document.getElementById('login');
+     var $send = document.getElementById('send');
+     let sock = io.connect('ws://localhost:8080');
+
+     $send.onclick = function(){
+       sock.emit('send',content.value);
+     }
+     sock.on('msg',(u,c)=>{
+       // var style = u == user ? "green" : "gray";
+       // var html = `<li style='background:${style}'><h5>${u}</h5><h4>${c}</h4>></li>`
+       let li = document.createElement('li');
+       li.className = u == user ? 'mine' : 'other';
+       li.innerHTML = `<h5>${u}</h5><h4>${c}</h4>`;
+       document.getElementById('messages').appendChild(li);
+     })
+     sock.on('send_res',(err,data)=>{
+       if(err){
+         alert('send fail');
+       }else{
+         alert('send success')
+       }
+     })
+     $reg.onclick = function(){
+        sock.emit('reg',user.value,pass.value);
+     }
+     $login.onclick = function(){
+       sock.emit('login',user.value,pass.value);
+     }
+     sock.on('login_res',(err,data)=>{
+       if(err){
+         alert(err);
+       }else{
+         user = user.value;
+         console.log(data);
+         alert('login success');
+       }
+     })
+     sock.on('reg_res',(err,data)=>{
+        if(err){
+          alert(data);
+        }else{
+          alert('注册成功');
+        }
+     })
+     sock.on('disconnect',(){
+       db.query(`update user_table online=0 where id='${userinfo.id}'`,(err,data)=>{
+         if(err){
+           console.log('database error');
+         }else{
+           onlineQueue.remove(sock);
+         }
+       })
+     })
+  </script>
+</html>
