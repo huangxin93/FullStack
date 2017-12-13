@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>拖拽上传</title>
+        <script>
+            window.onload = function(){
+                const box = document.getElementsByClassName('box')[0];
+                const text = document.getElementsByClassName('text')[0];
+                const upload = document.getElementById('upload');
+                const aFiles = [];
+                box.addEventListener('dragenter',()=>{
+                    text.innerHTML = '请放手'
+                },false);
+                box.addEventListener('dragleave',()=>{
+                    text.innerHTML = '请将文件拖拽至此处'
+                },false)
+                box.addEventListener('dragover',(ev)=>{
+                    ev.preventDefault(); //因浏览器默认文件拖拽会打开文件，所以需阻止默认事件
+                },false)
+                box.addEventListener('drop',(ev)=>{
+                    ev.preventDefault();
+                    const fileReader = new FileReader();
+                    fileReader.readAsDataURL(ev.dataTransfer.files[0]);
+                    Array.from(ev.dataTransfer.files).forEach(file=>{
+                        aFiles.push(file);
+                    })
+                    fileReader.onload = () => {
+                        const preview = document.getElementById('preview');
+                        preview.src = fileReader.result;
+                        
+                    }
+                    
+                upload.onclick = ()=>{
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('post','/upload',true);
+                    const formData = new FormData();
+                    aFiles.forEach( file => {
+                        formData.append('fileInput',file);
+                    })
+                    xhr.send(formData);
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState == 4){
+                            if(xhr.status >= 200 && xhr.status < 300){
+                                alert('upload success');
+                            }else{
+                                alert('upload fail');
+                            }
+                        }
+                    }
+                }
+                },false)
+            }
+        </script>
+        <style>
+            .box{
+                height: 300px;
+                width: 400px;
+                line-height: 300px;
+                background: #eeeeee;
+                text-align: center
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <span class="text">请将文件拖拽至此处</span>
+        </div>
+        <img id="preview" />
+        <button id="upload">上传</button>
+    </body>
+</html>

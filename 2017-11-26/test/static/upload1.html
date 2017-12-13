@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>单个input file上传文件</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			const upload = document.getElementsByClassName('upload');
+			upload[0].onclick = function(){
+				const oFile = document.getElementsByClassName('f1');
+				const xhr = new XMLHttpRequest();
+				xhr.open('post','/upload',true);
+				const formData = new FormData();
+				Array.from(oFile).forEach(element => {
+					Array.from(element.files).forEach(file => {
+					formData.append('fileInput',file);
+				});
+				});
+				
+				xhr.send(formData);
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4){
+						if(xhr.status >= 200 && xhr.status < 300){
+							alert('upload success');
+						}else{
+							alert('upload fail');
+						}
+					}
+				}
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<input type="file" name="f1" class="f1" multiple>
+	<input type="file" name="f1" class="f1" multiple>
+	<input type="file" name="f1" class="f1" multiple>
+	<button class="upload">上传</button>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+    <head>
+            <title></title>
+            <script>
+                window.onload = function(){
+                    const canvas = document.getElementById('canvas');
+                    const gd = canvas.getContext('2d');
+                    let startX,startY;
+                    canvas.onmousedown = function(ev){
+                        startX = ev.offsetX;
+                        startY = ev.offsetY;
+                        canvas.onmousemove = function(ev){
+                            gd.beginPath();
+                            gd.moveTo(startX,startY);
+                            gd.lineTo(ev.offsetX,ev.offsetY);
+                            gd.stroke();
+                            startX = ev.offsetX;
+                            startY = ev.offsetY;
+                        }
+                        canvas.onmouseup = function(){
+                            canvas.onmousemove = null;
+                            canvas.onmouseup = null;
+                        }
+                    }
+                    const toBase64 = document.getElementById('toBase64');
+                    toBase64.onclick = function(){
+                        console.log(`base64:${canvas.toDataURL()}`);
+                    }
+                }
+            </script>
+    </head>
+    <body>
+        <canvas id="canvas" width="800px" height="600px">
+
+        </canvas>
+        <button id="toBase64">base64</button>
+    </body>
+</html>

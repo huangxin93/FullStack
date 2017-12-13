@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>文件上传显示进度</title>
+        <script>
+            window.onload = function(){
+                const upload = document.getElementById('upload');
+                const fileInput = document.getElementById('fileInput');
+                const meter = document.getElementById('meter');
+                upload.onclick = function(){
+                    const xhr = new XMLHttpRequest();
+                    xhr.upload.onprogress = function(ev){
+                        meter.value = ev.loaded/ev.total * 100
+                    }
+                    xhr.upload.onload = function(){
+
+                    }
+                    xhr.upload.onerror = function(){
+
+                    }
+                    xhr.open('post','/upload',true);
+                    const formData = new FormData();
+                    Array.from(fileInput.files).forEach(file=>{
+                        formData.append('fileInput',file);
+                    })
+                    xhr.send(formData);
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState == 4){
+                            if(xhr.status >= 200 && xhr.status < 300){
+                                alert('upload success');
+                            }else{
+                                alert('upload fail');
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <input type="file" id="fileInput">
+        <br/>
+        <meter min="0" max="100" value="0" id="meter"></meter>
+        <button id="upload">upload</button>
+    </body>
+</html>
