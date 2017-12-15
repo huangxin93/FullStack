@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script>
+           window.onload = function(){
+            const canvas = document.querySelector('#canvas');
+            const gd = canvas.getContext('2d');
+            //画一条线
+           
+            gd.beginPath();
+            gd.moveTo(100,100);
+            gd.lineTo(100,300);
+            gd.strokeStyle = 'red';
+            gd.stroke();
+            //画一个矩形
+            //方法一：
+            // gd.beginPath();
+            // gd.moveTo(200,100);
+            // gd.lineTo(400,100);
+            // gd.lineTo(400,300);
+            // gd.lineTo(200,300);
+            // gd.moveTo(200,100);//不是用连接会原点，放大会出现无法闭合
+            // gd.closePath();
+            // gd.strokeStyle = 'yellow';
+            // gd.stroke();
+            //方法二
+            // gd.beginPath();
+            // gd.rect(200,200,100,100);
+            // gd.strokeStyle = 'blue';
+            // gd.stroke();
+            //方法三：
+            // gd.fillStyle="red";
+            // gd.fillRect(200,200,100,100);
+            
+
+            //画一个圆形
+            gd.beginPath();
+            gd.arc(200,200,50,0,2*Math.PI,true);
+            gd.stroke();
+
+            //画一个弧
+            // gd.beginPath();
+            // gd.arc(200,200,50,45*Math.PI/180,90*Math.PI/180,true);
+            // gd.stroke();
+            // gd.beginPath();
+            // gd.arc(400,200,50,0*Math.PI/180,110*Math.PI/180,false);
+            // gd.stroke();
+
+           }
+        </script>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height='600'></canvas>
+    </body>
+</html>

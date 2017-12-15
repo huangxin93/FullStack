@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title></title>
+        <script>
+            window.onload = function(){
+                const cavans = document.querySelector('canvas');
+                //置灰
+                const imageDatas = canvas.getImageData();
+                for(let i = 0 ; i < imageDatas.length ; i + 4){
+                    let base = (imageDatas[i] + imageDatas[i+1] + imageDatas[i+2]) / 3;
+                    imageDatas[i] = imageDatas[i+1] = imageDatas[i+2]= base;
+                }
+                canvas.pullImageData(imageDatas);
+            }
+        </script>
+
+    </head>
+    <body>
+        <canvas height="600" width="800">
+
+        </canvas>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+   <head>
+        <title></title>
+        <script>
+            window.onload = function(){
+
+                class Utils{
+                    d2a(n){
+                        return n*Math.PI/180;
+                    }
+                    a2d(n){
+                        return n*180/Math.PI;
+                    }
+                }
+                class Chart{
+                    constructor(canvas,rx,ry,r){
+                        this.rx = rx;
+                        this.ry = ry;
+                        this.r = r;
+                        this.canvas = canvas;
+                        this.color = ['#ccc','#efc','#afe','#eea','#00a'];
+                        this.utils = new Utils();
+
+                        this.pie = this.pie.bind(this);
+                        this.draw = this.draw.bind(this);
+                    }
+                    pie(startAng,endAng,color){
+                        const gd = this.canvas.getContext('2d');
+                        gd.beginPath();
+
+                        gd.moveTo(this.rx,this.ry);
+                        
+                        let x = this.rx + Math.sin(this.utils.d2a(startAng))*this.r,
+                            y = this.ry - Math.cos(this.utils.d2a(startAng))*this.r;
+                        
+                        gd.lineTo(x,y);
+
+                        gd.arc(this.rx,this.ry,this.r,this.utils.d2a(startAng-90),this.utils.d2a(endAng-90),false);
+                        
+                        gd.closePath();
+                        // gd.stroke(); 
+                        gd.fillStyle = color;
+                        gd.fill();
+
+                    }
+                    draw(data){
+                        const _this = this,sum = data.reduce((temp,item,index) =>{return temp + item});
+                        let angs,lastAng = 0;
+                        angs = data.map((item) => {return item*360/sum});
+                        // _this.pie(lastAng,angs[0],_this.color[0]);
+                        angs.forEach((ang,index)=>{
+                            _this.pie(lastAng,ang+lastAng,_this.color[index]);
+                            lastAng += ang;
+                        })
+                    }
+                }
+                const canvas = document.querySelector('#canvas');
+                const item = [30,100,420,600,1000];
+                const chart = new Chart(canvas,400,300,200);
+                chart.draw(item)
+            }
+        </script>
+   </head>
+   <body style="background:#000">
+       <canvas id="canvas" height="600" width="800" style="background:#fff;margin:50 auto">
+
+       </canvas>
+   </body>
+</html>
