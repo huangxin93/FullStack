@@ -1,21 +1,64 @@
 <html>
     <head>
         <title></title>
+        <meta charset=utf-8>
         <script>
             window.onload = function(){
-                const cavans = document.querySelector('canvas');
-                //置灰
-                const imageDatas = canvas.getImageData();
-                for(let i = 0 ; i < imageDatas.length ; i + 4){
-                    let base = (imageDatas[i] + imageDatas[i+1] + imageDatas[i+2]) / 3;
-                    imageDatas[i] = imageDatas[i+1] = imageDatas[i+2]= base;
+                const canvas = document.querySelector('canvas'),gd = canvas.getContext('2d');
+                const btn  = document.querySelector('.gray'),
+                      btn2  = document.querySelector('.transparent'),
+                      btn3  = document.querySelector('.btn3');
+                const img = new Image();
+                img.src = '1.jpg';
+                img.onload = function(){
+                    gd.drawImage(img,0,0);
                 }
-                canvas.pullImageData(imageDatas);
+                btn.onclick = function(){
+                                        //置灰                 
+                    const imageData = gd.getImageData(0,0,canvas.width,canvas.height),imageDatas = imageData.data;
+                    // for(let i = 0 ; i < imageDatas.length ; i + 4){
+                    //     let base = (imageDatas[i] + imageDatas[i+1] + imageDatas[i+2]) / 3;
+                    //     imageDatas[i] = imageDatas[i+1] = imageDatas[i+2]= base;
+                    // }
+                    for(let r = 0 ; r < canvas.height ; r ++ ){
+                        for(let c = 0 ; c < canvas.width ; c ++ ){
+                            let avea = (imageDatas[(r * canvas.width + c) * 4] + imageDatas[(r * canvas.width + c) * 4 +1] +  imageDatas[(r * canvas.width + c) * 4 +2]) /3;
+                            imageDatas[(r * canvas.width + c) * 4] = imageDatas[(r * canvas.width + c) * 4 +1] =  imageDatas[(r * canvas.width + c) * 4 +2] = avea;
+                        }
+                    }
+                    gd.putImageData(imageData,0,0);
+                }
+                btn2.onclick = function(){
+                    //置灰                 
+                    const imageData = gd.getImageData(0,0,canvas.width,canvas.height),imageDatas = imageData.data;
+                    // for(let i = 0 ; i < imageDatas.length ; i + 4){
+                    //     let base = (imageDatas[i] + imageDatas[i+1] + imageDatas[i+2]) / 3;
+                    //     imageDatas[i] = imageDatas[i+1] = imageDatas[i+2]= base;
+                    // }
+                    for(let r = 0 ; r < canvas.height ; r ++ ){
+                        for(let c = 0 ; c < canvas.width ; c ++ ){
+                           if(imageDatas[(r * canvas.width + c) * 4] ==255 && imageDatas[(r * canvas.width + c) * 4 +1] ==255 && imageDatas[(r * canvas.width + c) * 4 +2]==255){
+                            imageDatas[(r * canvas.width + c) * 4 + 3] = 0;
+                           }
+                        }
+                    }
+                    gd.putImageData(imageData,0,0);
+                }
+                btn3.onclick = function(){
+                    //toDataURL(type,encoderOptions)
+                    //type: image/png(默认)  image/jpeg
+                    //encoderOptions 画质 0-1
+                    const base64 = canvas.toDataURL();
+                }
+
             }
         </script>
 
     </head>
     <body>
+        <button class="gray">置灰</button>
+        <button class="transparent">透明</button>
+        <button class="btn3">导出</button>
         <canvas height="600" width="800">
 
         </canvas>

@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            .box{
+                height:100px;
+                width: 100px;
+                background: red;
+                margin: 10px;
+                
+            }
+            .content_box{
+                box-sizing: content-box;
+            }
+            .border_box{
+                box-sizing: border-box;
+            }
+            .differences{
+                border: 10px solid;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box content_box differences">
+            1
+        </div>
+        <div class="box">
+1
+        </div>
+        <div class="box border_box differences">
+1
+        </div>
+    </body>
+</html>
