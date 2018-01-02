@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta name='viewport' content="width=device-width,user-scalable=0,inital-scale=1.0">
+        <style>
+            .box{
+                background: red;
+                width: 100px;
+                height:100px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+            }
+        </style>
+        <script>
+            window.onload = function(){
+                const box = document.querySelector('.box');
+                box.addEventListener('touchstart',function(ev){
+
+                    let x = ev.targetTouches[0].pageX - box.offsetLeft,
+                        y = ev.targetTouches[0].pageY - box.offsetTop;
+
+                    ev.targetTouches;
+                    ev.touches;
+                    ev.changedTouches
+
+                    function move(ev){
+
+                        box.style.left = ev.targetTouches[0].pageX - x + "px";
+                        box.style.top = ev.targetTouches[0].pageY - y + 'px';
+
+                    }
+                    function end(ev){
+                        box.removeEventListener('touchmove',move);
+                        box.removeEventListener('touchend',end);
+                    }
+                    box.addEventListener('touchmove',move)
+
+                    box.addEventListener('touchend',end)
+                })
+            }
+        </script>
+    </head>
+    <body>
+        <div class="box">
+
+        </div>
+    </body>
+</html>

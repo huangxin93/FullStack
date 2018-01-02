@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+                <style>
+            /* .box{
+                height:300px;
+                width:300px;
+                background: red;
+            } */
+            html{
+                font-size: 20px;
+            }
+            body{
+                margin: 0 ;
+            }
+            .banner{
+                width:37.5rem;
+                height:15rem;
+                background: red;
+                overflow: hidden;
+            }
+            .banner ul{
+                width: 9999rem;
+                height:15px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                display: flex;
+                transform: translateX(0px);
+            }
+            .banner ul li{
+                width: 37.5rem;
+                height:15rem;
+            }
+        </style>
+         <script>
+            window.onload = function(){
+
+                document.documentElement.style.fontSize = document.documentElement.clientWidth * 20 / 750 + "px";
+
+                const banner_ul = document.querySelector('ul'),
+                      banner = document.querySelector('.banner'),
+                      content = document.querySelector('.content');
+                let   left = 0,
+                      top = 0;
+                banner.addEventListener('touchstart',function(ev){
+
+                    let startX = ev.targetTouches[0].clientX,startY = ev.targetTouches[0].clientY;
+
+                    let dirX = startX - left,dirY = startY - top;
+
+                    banner_ul.style.transition = '';
+
+                    let dir = '';
+                    function fnMove(ev){
+
+                        if(!dir){
+                            if(Math.abs(ev.targetTouches[0].clientX - startX) > 5){
+                                dir ='x';
+                            }else if(Math.abs(ev.targetTouches[0].clientY - startY) > 5){
+                                dir = 'y';
+                            }
+                        }else{
+                            if(dir == 'x'){
+
+                                left = ev.targetTouches[0].clientX - dirX;
+                                banner_ul.style.transform = `translateX(${left}px)`
+
+                            }else if(dir == 'y'){
+
+                                top = ev.targetTouches[0].clientY - dirY;
+                                content.style.transform = `translateY(${top}px)`
+
+                            }
+                        }
+
+
+
+                        
+                    }
+
+                    function fnEnd(ev){
+
+                        //结束后回弹
+
+                        let n = Math.round(left / banner.offsetWidth);
+
+                        banner_ul.style.transition = '0.7s all ease';
+                        banner_ul.style.transform =`translateX(${n*banner.offsetWidth}px)`
+
+                        banner.removeEventListener('touchmove',fnMove,false);
+                        banner.removeEventListener('touchend',fnEnd,false);
+                    }
+
+                    banner.addEventListener('touchmove',fnMove,false);
+                    banner.addEventListener('touchend',fnEnd,false);
+
+
+                })
+               
+            }       
+         </script>
+    </head>
+    <body>
+        <div class="content">
+            <div class="banner">
+                <ul>
+                    <li style="background:yellow">1</li>
+                    <li style="background:blue">2</li>
+                    <li style="background:pink">3</li>
+                    <li style="background:green">4</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>啊啊啊</li>
+                    <li>啊啊啊</li>
+                    <li>啊啊啊</li>
+                    <li>啊啊啊</li>
+                    <li>啊啊啊</li>
+                    <li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li><li>啊啊啊</li>
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="box">
+        </div>
+        <div class="console">
+
+        </div> -->
+    </body>
+</html>
